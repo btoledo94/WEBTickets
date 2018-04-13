@@ -1,0 +1,87 @@
+<md-progress-linear style="position: fixed; z-index: 3;" md-mode="query" ng-show="vm.isShowProgressLinear"></md-progress-linear>
+<md-content style="padding-top: 5px;">
+
+    <div layout="row" layout-align="center center">
+        <div flex="50">
+            <md-card>
+
+                <ng-form id="registerForm" name="registerForm">
+
+                    <div layout="row" layout-align="center center">
+                        <h3>Agregar usuario</h3>
+                    </div>
+
+                    <div layout="row" layout-align="center center">
+                        <div flex="90">
+
+                            <md-input-container style="width: 98%;">
+                                <label>Nombre Completo</label>
+                                <input type="text" name="nombreUsuario" ng-model="vm.registro.nombreUsuario" required/>
+                            </md-input-container>
+
+                        </div>
+                    </div>
+
+                    <div layout="row" layout-align="center center">
+                        <div flex="90">
+
+                            <md-input-container style="width: 98%;">
+                                <label>Correo Electronico</label>
+                                <input type="text" name="correo" ng-model="vm.registro.correo" required/>
+                            </md-input-container>
+
+                        </div>
+                    </div>
+
+                   
+                    <div layout="row" layout-align="center center">
+                        <div flex="90">
+
+                            <md-input-container style="width: 98%;">
+                                <label>Contraseña</label>
+                                <input type="password" name="password" ng-model="vm.registro.password" required/>
+                            </md-input-container>
+
+                        </div>
+                    </div>
+
+                                        
+                    <!--
+                    Datos adicionales dependiendo del perfil
+                    -->
+                    <div layout="row" layout-align="center center">
+                        <div flex="90">
+                            <md-input-container style="width: 98%;">
+                                <label>Departamento</label>
+                                <md-select ng-model="vm.registro.departamentoId" name="departamentoId" required>
+                                    <md-option ng-repeat="departamento in vm.departamento" value="{{departamento.id}}" >{{departamento.nombreDepartamento}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                    </div>
+                    
+                    <div layout="row" layout-align="center center">
+                        <div flex="90">
+                            <md-input-container style="width: 98%;">
+                                <label>Area Trabajo</label>
+                                <md-select ng-model="vm.registro.areaTrabajoId" ng-click="vm.getAreaTrabajo(vm.registro.departamentoId)"  name="areaTrabajoId" required>
+                                    <md-option ng-repeat="areaTrabajo in vm.areaTrabajo" value="{{areaTrabajo.id}}" >{{areaTrabajo.nombreArea}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                    </div>
+
+                    
+                    <div layout="row" layout-align="center center">
+                        <md-button class="md-raised md-warn" ng-click="vm.registrar()">Guardar</md-button>
+                    </div>
+
+                </ng-form>
+                
+            </md-card>
+        </div>
+    </div>
+
+
+
+</md-content>

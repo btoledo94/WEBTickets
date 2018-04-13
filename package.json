@@ -1,0 +1,9 @@
+{
+    "name": "WEBTickets",
+    "version": "1.0.0",
+    "keywords": ["util", "functional", "server", "client", "browser"],
+    "author": "BYRON TOLEDO",
+    "contributors": [],
+    "dependencies": {}
+    
+}
