@@ -14,11 +14,11 @@ app.service('UsuarioService', function ($http, WS_URL) {
         });
     };
 
-    service.onCreate = function (registro) {
+    service.onCreate = function (usuario) {
         return $http({
             url: getUrl(),
             method: 'POST',
-            data: registro,
+            data: usuario,
             params: {}
         });
     };

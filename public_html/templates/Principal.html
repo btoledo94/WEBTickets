@@ -53,8 +53,8 @@
                         <div flex="90">
                             <md-input-container style="width: 98%;">
                                 <label>Departamento</label>
-                                <md-select ng-model="vm.registro.departamentoId" name="departamentoId" required>
-                                    <md-option ng-repeat="departamento in vm.departamento" value="{{departamento.id}}" >{{departamento.nombreDepartamento}}</md-option>
+                                <md-select ng-model="vm.registro2.departamento" name="departamento" required>
+                                    <md-option ng-repeat="departamento in vm.departamentos" value="{{departamento.id}}" >{{departamento.nombreDepartamento}}</md-option>
                                 </md-select>
                             </md-input-container>
                         </div>
@@ -64,8 +64,8 @@
                         <div flex="90">
                             <md-input-container style="width: 98%;">
                                 <label>Area Trabajo</label>
-                                <md-select ng-model="vm.registro.areaTrabajoId" ng-click="vm.getAreaTrabajo(vm.registro.departamentoId)"  name="areaTrabajoId" required>
-                                    <md-option ng-repeat="areaTrabajo in vm.areaTrabajo" value="{{areaTrabajo.id}}" >{{areaTrabajo.nombreArea}}</md-option>
+                                <md-select ng-model="vm.registro.areaTrabajo" ng-click="vm.getAreaTrabajos(vm.registro2.departamento)"  required>
+                                    <md-option ng-repeat="areaTrabajo in vm.areaTrabajos" value="{{areaTrabajo}}" >{{areaTrabajo.nombreArea}}</md-option>
                                 </md-select>
                             </md-input-container>
                         </div>

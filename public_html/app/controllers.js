@@ -1,15 +1,19 @@
 app.controller('AddUser', function ($scope,UsuarioService,UsuarioDepartamento, $timeout,$state) {
 
     var vm = this;
-    vm.departamento = [];
-    vm.areaTrabajo = [];
+    vm.departamentos = [];
+    vm.areaTrabajos = [];
     
-    vm.getDepartamento = function () {
+    vm.registro = {
+        
+    };
+    
+    vm.getDepartamentos = function () {
 
         UsuarioDepartamento.findAll().success(function (data, status) {
             console.log(data);
 
-            vm.departamento = data;
+            vm.departamentos = data;
             
 
         }).error(function (data, status) {
@@ -18,13 +22,13 @@ app.controller('AddUser', function ($scope,UsuarioService,UsuarioDepartamento, $
         
     };
     
-    vm.getAreaTrabajo = function (departamentoId) {
+    vm.getAreaTrabajos = function (departamentoId) {
               
         
         UsuarioDepartamento.getfindByDepartamentoId(departamentoId).success(function (data, status) {
             console.log(data);
 
-            vm.areaTrabajo = data;
+            vm.areaTrabajos = data;
 
         }).error(function (data, status) {
             console.error(data);
@@ -35,19 +39,11 @@ app.controller('AddUser', function ($scope,UsuarioService,UsuarioDepartamento, $
 
       vm.registrar = function () {
 
-        console.log($scope.registerForm.$invalid);
-
         console.log(vm.registro);
-
-        if ($scope.registerForm.$invalid) {
-            return false;
-        }
-
-       
-        vm.isShowProgressLinear = true;
-        UsuarioService.onCreate(vm.registro).success(function (data, status) {
-            vm.isShowProgressLinear = false;
-
+        
+               
+           UsuarioService.onCreate(vm.registro).success(function (data, status) {
+        
             if (status === 200) {
                 
                 /*
@@ -64,19 +60,16 @@ app.controller('AddUser', function ($scope,UsuarioService,UsuarioDepartamento, $
                
             }
 
-
-
-            console.log(data);
+         
         }).error(function (data, status) {
-            vm.isShowProgressLinear = false;
             console.error(data);
         });
 
     };
     
     $timeout(function () {
-        vm.getDepartamento();
-        vm.getAreaTrabajo();
+        vm.getDepartamentos();
+        vm.getAreaTrabajos();
      }, 1000);
 
 });
