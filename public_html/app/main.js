@@ -7,11 +7,63 @@
 var app = angular.module('app', ['ui.router', 'pascalprecht.translate', 'ngAria', 'ngMaterial', 'ngMessages', 'ngAnimate', 'ngCookies', 'chart.js']);
 
 app.constant('WS_URL', 'http://localhost:8084/TicketsWS/');
+//'http://192.168.0.4:8084/TicketsWS/'
 
-app.config(function ($stateProvider) {
-   
+app.factory('interceptor', function ($q, $cookies, $injector) {
+    return {
+        'request': function (config) {
+            if (config.url.indexOf('http') === 0) {
 
-     $stateProvider
+                var session = $cookies.getObject('TicketsUMG');
+
+                if (session !== undefined) {
+
+
+                    if (config.params === undefined) {
+                        config.params = {'token': session.token, 'userId': session.userId};
+                    } else {
+                        config.params.token = session.token;
+                        config.params.userId = session.userId;
+                    }
+                }
+            }
+            return config;
+
+        },
+        'response': function (response) {
+            return response;
+        }
+    };
+});
+
+
+app.config(function ($stateProvider, $httpProvider) {
+
+    $httpProvider.interceptors.push('interceptor');
+
+    $stateProvider
+            .state('login', {
+                url: '/login?password&usuario',
+                views: {
+                    "index": {
+                        controller: 'LoginUsuario as vm',
+                        templateUrl: 'templates/login.html'
+                    }
+                },
+                params: {
+                    password: null,
+                    usuario: null
+                }
+            })
+            .state('Menu', {
+                url: '/Menu',
+                views: {
+                    "index": {
+                        templateUrl: 'templates/Menu.html',
+                        controller: 'MenuController as vm'
+                    }
+                }
+            })
             .state('Principal', {
                 url: '/Principal',
                 views: {
@@ -21,12 +73,12 @@ app.config(function ($stateProvider) {
                     }
                 }
             });
-   
+
 
 });
 
 app.run(function ($state) {
 
-    $state.transitionTo("Principal");
+    $state.transitionTo("Menu");
 
 });

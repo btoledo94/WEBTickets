@@ -1,0 +1,66 @@
+<md-progress-linear style="position: fixed; z-index: 3;" md-mode="query" ng-show="vm.isShowProgressLinear"></md-progress-linear>
+<div layout="row" layout-align="center center" style="padding-top: 5px;">
+
+    <div flex="30">
+        <md-card>
+            <md-content style="padding: 10px;">
+
+                <div>
+                    <center>
+                        <div style="width: 180px; padding: 10px;">
+                            <img style="width: 100%;" src="resources/img/logoUmg.png" />
+                        </div>
+                    </center>
+                </div>
+
+                <ng-form name="loginForm" id="loginForm">
+
+                    <div layout="row" layout-align="center center">
+                        <h3>B&D TICKETS</h3>
+                    </div>
+
+                    <div layout="row" layout-align="center center">
+                        <div flex="70">
+                            <md-input-container style="width: 98%;">
+                                <label>Usuario</label>
+                                <input type="text" ng-model="vm.correo" name="correo" required />
+                                <div ng-messages="loginForm.correo.$error">
+                                    <div ng-message="required">Campo requerido</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+
+                    </div>
+
+                    <div layout="row" layout-align="center center">
+                        <div flex="70">
+                            <md-input-container style="width: 98%;">
+                                <label>Contraseña</label>
+                                <input type="password" ng-model="vm.password" name="password" ng-enter='vm.login()' required />
+                                <div ng-messages="loginForm.password.$error">
+                                    <div ng-message="required">Campo requerido</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                    </div>
+
+                    <div layout="row" layout-align="center center">
+                        <md-button class="md-raised md-primary" ng-disabled="loginForm.$invalid" ng-click="vm.login(true)">Ingresar</md-button>
+                    </div>
+                    
+                     <div layout="row" layout-align="center center">
+                        <md-button class="md-raised md-primary" href="#/Principal">Registrar</md-button>
+                    </div>
+                    <!--
+                    <div layout="row" layout-align="center center">
+                        <a ui-sref="register" >Registrarme</a>
+                    </div>
+                    -->
+
+                </ng-form>
+
+            </md-content>
+        </md-card>
+    </div>
+
+</div>
