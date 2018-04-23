@@ -55,21 +55,30 @@ app.config(function ($stateProvider, $httpProvider) {
                     usuario: null
                 }
             })
-            .state('Menu', {
-                url: '/Menu',
+            .state('menu', {
+                url: '/menu',
                 views: {
                     "index": {
-                        templateUrl: 'templates/Menu.html',
+                        templateUrl: 'templates/menu.html',
                         controller: 'MenuController as vm'
                     }
                 }
             })
-            .state('Principal', {
+            .state('menu.Principal', {
                 url: '/Principal',
                 views: {
-                    "index": {
+                    "menu": {
                         controller: 'AddUser as vm',
                         templateUrl: 'templates/Principal.html'
+                    }
+                }
+            })
+            .state('menu.crearTicket', {
+                url: '/crearTicket',
+                views: {
+                    "menu": {
+                        //controller: 'AddUser as vm',
+                        templateUrl: 'templates/crearTicket.html'
                     }
                 }
             });
@@ -79,6 +88,6 @@ app.config(function ($stateProvider, $httpProvider) {
 
 app.run(function ($state) {
 
-    $state.transitionTo("Menu");
+    $state.transitionTo("menu");
 
 });

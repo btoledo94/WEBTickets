@@ -108,7 +108,7 @@ app.controller('LoginUsuario', function ($stateParams, $rootScope, $scope, $mdSi
              * validamos si el token es correcto
              */
 
-            $state.transitionTo("Menu");
+            $state.transitionTo("menu");
 
         } else {
 
@@ -165,7 +165,7 @@ app.controller('LoginUsuario', function ($stateParams, $rootScope, $scope, $mdSi
 
                 console.log($rootScope);
 
-                $state.transitionTo("Menu");
+                $state.transitionTo("menu");
 
             }
 
@@ -213,7 +213,7 @@ app.controller('LoginUsuario', function ($stateParams, $rootScope, $scope, $mdSi
 
 });
 
-app.controller('MenuController', function ($mdSidenav, $state, $cookies,UsuarioSesion) {
+app.controller('MenuController', function ($mdSidenav,$mdMenu, $state, $cookies,UsuarioSesion) {
 
     var vm = this;
 
@@ -243,6 +243,12 @@ vm.pantallas = [];
            
         });
     };
+    
+    vm.abrirUsuario = function () {
+        $mdSidenav('appUsuario').toggle().then(function () {
+           
+        });
+    };
 
     
     vm.cerrarSesion = function (){
@@ -266,7 +272,7 @@ vm.pantallas = [];
             vm.crearUsuario();
             break;
             case -3:
-            vm.crearUsuario();
+            vm.mostrarUsuario();
             break;
             default:
                 break;
@@ -275,13 +281,20 @@ vm.pantallas = [];
     };
     
     vm.crearUsuario = function(){
-        $state.go("Principal");
+        $state.go("menu.Principal");
     };
     
     vm.mostrarUsuario = function(){
-        $state.go("Principal");
+        $state.go("menu.crearTicket");
     };
     
+    vm.crearTicket = function(){
+        $state.go("menu.crearTicket");
+    };
+    
+    vm.inicio = function(){
+        $state.go("menu");
+    };
      vm.validateSession();
     
 });
