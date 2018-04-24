@@ -300,3 +300,12 @@ vm.pantallas = [];
      vm.validateSession();
     
 });
+
+
+app.controller('AddTicketController', function ($state, $cookies,UsuarioSesion) {
+
+    var vm = this;
+    
+    vm.departamento= {};
+    
+});

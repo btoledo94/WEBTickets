@@ -3,7 +3,7 @@
         <div flex="50">
             <md-card>
 
-                <ng-form id="registerForm" name="registerForm">
+                <ng-form id="ticketForm" name="ticketForm">
 
                     <div layout="row" layout-align="center center">
                         <h3>CREAR TICKET</h3>
@@ -25,7 +25,7 @@
 
                             <md-input-container style="width: 98%;">
                                 <label>CC: Correo Electronico</label>
-                                <input type="text" name="correo" ng-model="correo" required/>
+                                <input type="text" name="correo" ng-model="correo"/>
                             </md-input-container>
 
                         </div>
@@ -60,7 +60,7 @@
 
                     
                     <div layout="row" layout-align="center center">
-                        <md-button class="md-raised md-warn" ng-disabled="registerForm.$invalid" ng-click="vm.registrar()">Guardar</md-button>
+                        <md-button class="md-raised md-warn" ng-disabled="ticketForm.$invalid" ng-click="vm.registrar()">Guardar</md-button>
                     </div>
 
                 </ng-form>
