@@ -213,9 +213,10 @@ app.controller('LoginUsuario', function ($stateParams, $rootScope, $scope, $mdSi
 
 });
 
-app.controller('MenuController', function ($mdSidenav,$mdMenu, $state, $cookies,UsuarioSesion) {
+app.controller('MenuController', function ($mdSidenav, $state, $cookies,UsuarioSesion) {
 
     var vm = this;
+    var originatorEv;
 
 vm.pantallas = [];
 
@@ -249,7 +250,8 @@ vm.pantallas = [];
            
         });
     };
-
+    
+   
     
     vm.cerrarSesion = function (){
         UsuarioSesion.logout(vm.pantallas.token);

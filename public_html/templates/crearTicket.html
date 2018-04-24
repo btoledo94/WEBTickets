@@ -1,16 +1,74 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+<md-content ng-cloak>
+    <div layout="row" layout-align="center center">
+        <div flex="50">
+            <md-card>
+
+                <ng-form id="registerForm" name="registerForm">
+
+                    <div layout="row" layout-align="center center">
+                        <h3>CREAR TICKET</h3>
+                    </div>
+
+                    <div layout="row" layout-align="center center">
+                        <div flex="90">
+
+                            <md-input-container style="width: 98%;">
+                                <label>Titulo del Problema</label>
+                                <input type="text" name="nombreUsuario" ng-model="nombreUsuario" required/>
+                            </md-input-container>
+
+                        </div>
+                    </div>
+
+                    <div layout="row" layout-align="center center">
+                        <div flex="90">
+
+                            <md-input-container style="width: 98%;">
+                                <label>CC: Correo Electronico</label>
+                                <input type="text" name="correo" ng-model="correo" required/>
+                            </md-input-container>
+
+                        </div>
+                    </div>
+
+
+                    <div layout="row" layout-align="center center">
+                        <div flex="90">
+
+           <md-input-container class="md-block">
+             <label>Asunto</label>
+              <textarea ng-model="user.biography" md-maxlength="500" rows="5" md-select-on-focus></textarea>
+                    </md-input-container>
+                        </div>
+                    </div>
+
+
+                    <!--
+                    Datos adicionales dependiendo del perfil
+                    -->
+
+                    <div layout="row" layout-align="center center">
+                        <div flex="90">
+                            <md-input-container style="width: 98%;">
+                                <label>Departamento</label>
+                                <md-select ng-model="depa" required ng-change="vm.getAreaTrabajos(depa)">
+                                    <md-option ng-repeat="d in vm.departamentos" ng-value="{{d.id}}" >{{d.nombreDepartamento}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                    </div>
+
+                    
+                    <div layout="row" layout-align="center center">
+                        <md-button class="md-raised md-warn" ng-disabled="registerForm.$invalid" ng-click="vm.registrar()">Guardar</md-button>
+                    </div>
+
+                </ng-form>
+
+            </md-card>
+        </div>
+    </div>
+
+
+
+</md-content>
