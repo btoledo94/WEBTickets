@@ -77,7 +77,7 @@ app.config(function ($stateProvider, $httpProvider) {
                 url: '/crearTicket',
                 views: {
                     "menu": {
-                       controller: 'AddTicketController as vm',
+                      // controller: 'AddTicketController as vm',
                         templateUrl: 'templates/crearTicket.html'
                     }
                 }
