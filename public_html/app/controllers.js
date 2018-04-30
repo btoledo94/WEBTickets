@@ -294,6 +294,10 @@ vm.pantallas = [];
         $state.go("menu.crearTicket");
     };
     
+    vm.bandejaTicket = function(){
+        $state.go("menu.bandejaTicket");
+    };
+    
     vm.inicio = function(){
         $state.go("menu");
     };
@@ -306,6 +310,13 @@ app.controller('AddTicketController', function ($state, $cookies,UsuarioSesion) 
 
     var vm = this;
     
-    vm.departamento= {};
-    
+    vm.departamento1={};
+    vm.ticket.fechaInicio;
+    vm.ticket.fechaFin;
+    vm.ticket.usuario= {};
+    vm.ticket.usuarioAsignado= {};
+    vm.ticket.ticketEstado= {};
+    vm.ticket.departamento= {};
+    vm.ticket.areaTrabajo= {};
+    vm.ticket.active;
 });

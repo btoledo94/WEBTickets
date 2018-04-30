@@ -77,8 +77,17 @@ app.config(function ($stateProvider, $httpProvider) {
                 url: '/crearTicket',
                 views: {
                     "menu": {
-                        //controller: 'AddUser as vm',
+                       controller: 'AddTicketController as vm',
                         templateUrl: 'templates/crearTicket.html'
+                    }
+                }
+            })
+            .state('menu.bandejaTicket', {
+                url: '/bandejaTicket',
+                views: {
+                    "menu": {
+                        //controller: 'AddUser as vm',
+                        templateUrl: 'templates/bandejaTicket.html'
                     }
                 }
             });
