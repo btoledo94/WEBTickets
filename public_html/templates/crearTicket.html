@@ -14,30 +14,19 @@
 
                             <md-input-container style="width: 98%;">
                                 <label>Titulo del Problema</label>
-                                <input type="text" name="nombreUsuario" ng-model="nombreUsuario" required/>
+                                <input type="text" name="tituloProblema" ng-model="vm.ticket.tituloProblema" required/>
                             </md-input-container>
 
                         </div>
                     </div>
 
-                    <div layout="row" layout-align="center center">
-                        <div flex="90">
-
-                            <md-input-container style="width: 98%;">
-                                <label>CC: Correo Electronico</label>
-                                <input type="text" name="correo" ng-model="vm.ticket.correo"/>
-                            </md-input-container>
-
-                        </div>
-                    </div>
-
-
+           
                     <div layout="row" layout-align="center center">
                         <div flex="90">
 
            <md-input-container class="md-block">
              <label>Asunto</label>
-              <textarea ng-model="user.biography" md-maxlength="500" rows="5" md-select-on-focus></textarea>
+              <textarea ng-model="vm.ticketDetalle.asunto" md-maxlength="500" rows="5" md-select-on-focus></textarea>
                     </md-input-container>
                         </div>
                     </div>
@@ -51,8 +40,8 @@
                         <div flex="90">
                             <md-input-container style="width: 98%;">
                                 <label>Departamento</label>
-                                <md-select ng-model="depa" required ng-change="vm.getAreaTrabajos(depa)">
-                                    <md-option ng-repeat="d in vm.departamentos" ng-value="{{d.id}}" >{{d.nombreDepartamento}}</md-option>
+                                <md-select ng-model="vm.dep" required>
+                                    <md-option ng-repeat="d in vm.departamento1" ng-value="{{d.id}}" >{{d.nombreDepartamento}}</md-option>
                                 </md-select>
                             </md-input-container>
                         </div>
@@ -60,7 +49,7 @@
 
                     
                     <div layout="row" layout-align="center center">
-                        <md-button class="md-raised md-warn" ng-disabled="ticketForm.$invalid" ng-click="vm.registrar()">Guardar</md-button>
+                        <md-button class="md-raised md-warn" ng-disabled="ticketForm.$invalid" ng-click="vm.crearticket()">Guardar</md-button>
                     </div>
 
                 </ng-form>

@@ -306,11 +306,16 @@ vm.pantallas = [];
 });
 
 
-app.controller('AddTicketController', function ($state, $cookies,UsuarioSesion) {
+app.controller('AddTicketController', function ($state, $cookies,UsuarioDepartamento,Ticketcreado,TicketDetallecreado) {
 
     var vm = this;
     
-    vm.departamento1={};
+    vm.departamento1=[];
+    vm.dep;
+    vm.pantallas;
+    
+    vm.ticket={};
+    vm.ticket.tituloProblema;
     vm.ticket.fechaInicio;
     vm.ticket.fechaFin;
     vm.ticket.usuario= {};
@@ -319,4 +324,78 @@ app.controller('AddTicketController', function ($state, $cookies,UsuarioSesion) 
     vm.ticket.departamento= {};
     vm.ticket.areaTrabajo= {};
     vm.ticket.active;
+    
+    vm.ticketDetalle={};
+    vm.ticketDetalle.asunto;
+    vm.ticketDetalle.fechaActualizar;
+    vm.ticketDetalle.ticket={};
+    
+    var session = $cookies.getObject('TicketsUMG');
+    
+    vm.getDepartamentos1 = function () {
+
+        UsuarioDepartamento.findAll().success(function (data, status) {
+
+            console.log("Departamentos: ", data);
+            vm.departamento1 = data;
+
+            console.log(vm.departamento1);
+
+        }).error(function (data, status) {
+            console.error(data);
+        });
+        
+      };
+      
+      vm.crearticket = function(){
+        
+          console.log(vm.dep);
+          
+          UsuarioDepartamento.getId(vm.dep).success(function (data, status) {
+
+            vm.ticket.departamento = data;
+            
+            console.log(vm.ticket.departamento);
+            
+           vm.correo = session.userin;
+           console.log(vm.ticket);
+           console.log(vm.correo);
+           
+           Ticketcreado.crearticketon(vm.ticket,vm.correo).success(function (data, status){
+                console.log(data);
+                
+                if (status === 200) {
+
+                    alert("Ticket Registrado Exitosamente");
+                   
+                   vm.ticketDetalle.ticket=data;
+                    console.log("este es detalle",vm.ticketDetalle);
+                   
+                   
+                   TicketDetallecreado.crearticketDetalle(vm.ticketDetalle,data.id).success(function (data, status){
+                       
+                        if (status === 200) {
+
+                    alert("Ticket Detallado Registrado Exitosamente");
+                }
+                    }).error(function (data, status) {
+             console.log(status);
+       });
+   
+       }
+           
+           }).error(function (data, status) {
+             console.log(status);
+
+       });
+
+        }).error(function (data, status) {
+            console.error(data);
+        });
+        
+        
+          
+      };
+      
+    vm.getDepartamentos1();
 });

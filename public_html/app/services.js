@@ -92,3 +92,42 @@ app.service('UsuarioSesion', function ($http, WS_URL) {
     };
 
 });
+
+
+app.service('Ticketcreado', function ($http, WS_URL) {
+
+    var service = this, path = 'api/Ticket';
+
+    function getUrl() {
+        return WS_URL + path;
+    }
+
+    service.crearticketon = function (ticket,correo) {
+        return $http({
+            url: getUrl() + '/',
+            method: 'POST',
+            data: ticket,
+            params: {'correo': correo}
+        });
+    };
+
+});
+
+app.service('TicketDetallecreado', function ($http, WS_URL) {
+
+    var service = this, path = 'api/TicketDetalle';
+
+    function getUrl() {
+        return WS_URL + path;
+    }
+
+    service.crearticketDetalle = function (ticketDetalle,ticketId) {
+        return $http({
+            url: getUrl() + '/',
+            method: 'POST',
+            data: ticketDetalle,
+            params: {'ticketId':ticketId}
+        });
+    };
+
+});
