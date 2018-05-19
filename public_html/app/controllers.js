@@ -9,9 +9,9 @@ app.controller('AddUser', function ($scope, UsuarioService, UsuarioDepartamento,
     vm.registro = {};
     vm.registro.areaTrabajo = {};
     vm.registro.areaTrabajo.departamento = {};
-    vm.registro.Correo;
-    vm.registro.NombreUsuario;
-    vm.registro.Password;
+    vm.registro.correo;
+    vm.registro.nombreUsuario;
+    vm.registro.password;
 
     vm.getDepartamentos = function () {
 
@@ -157,7 +157,7 @@ app.controller('LoginUsuario', function ($stateParams, $rootScope, $scope, $mdSi
                     'userId': data.usuario.id,
                     'userName': data.usuario.nombreUsuario,
                     'userin': data.usuario.correo,
-                    'menus': []
+                    'userdepartamento': data.usuario.areaTrabajo.departamento.id
                 };
 
                 
@@ -266,9 +266,7 @@ vm.pantallas = [];
 
         switch (menuId) {
             case -1:
-
                 vm.cerrarSesion();
-
                 break;
             case -2:
             vm.crearUsuario();
@@ -325,11 +323,8 @@ app.controller('AddTicketController', function ($state, $cookies,UsuarioDepartam
     vm.ticket.areaTrabajo= {};
     vm.ticket.active;
     
-    vm.ticketDetalle={};
-    vm.ticketDetalle.asunto;
-    vm.ticketDetalle.fechaActualizar;
-    vm.ticketDetalle.ticket={};
-    
+    vm.asunto;
+        
     var session = $cookies.getObject('TicketsUMG');
     
     vm.getDepartamentos1 = function () {
@@ -366,17 +361,18 @@ app.controller('AddTicketController', function ($state, $cookies,UsuarioDepartam
                 
                 if (status === 200) {
 
-                    alert("Ticket Registrado Exitosamente");
+                    
                    
-                   vm.ticketDetalle.ticket=data;
-                    console.log("este es detalle",vm.ticketDetalle);
+                   console.log("este es detalle",data.id);
                    
                    
-                   TicketDetallecreado.crearticketDetalle(vm.ticketDetalle,data.id).success(function (data, status){
+                   TicketDetallecreado.crearticketDetalle(vm.asunto,data.id).success(function (data, status){
                        
                         if (status === 200) {
 
-                    alert("Ticket Detallado Registrado Exitosamente");
+                    alert("Ticket Registrado Exitosamente");
+                    
+                    
                 }
                     }).error(function (data, status) {
              console.log(status);
@@ -393,9 +389,57 @@ app.controller('AddTicketController', function ($state, $cookies,UsuarioDepartam
             console.error(data);
         });
         
-        
+        $state.transitionTo("menu");
           
       };
       
     vm.getDepartamentos1();
+});
+
+
+
+app.controller('ticketBandeja', function ($scope, Ticketcreado, $cookies,$timeout,$mdDialog) {
+
+    var vm = this;
+    
+    vm.ticket=[];
+      
+    var session = $cookies.getObject('TicketsUMG');
+    
+    vm.getTicket = function () {
+       
+       
+        Ticketcreado.ticketmostrar(session.userdepartamento).success(function (data, status) {
+           
+            
+            console.log("tickets: ", data);
+            vm.ticket = data;
+
+            console.log(vm.ticket);
+
+        }).error(function (data, status) {
+            console.error(data);
+        });
+            
+    };
+    
+    
+    $scope.doSecondaryAction = function(event,d) {
+    $mdDialog.show(
+      $mdDialog.prompt()
+        .title('Usuario: '+d.usuario.nombreUsuario)
+        .textContent('Secondary actions can be used for one click actions')
+        .ariaLabel('Secondary click demo')
+        .placeholder('Texto')
+        .initialValue()
+        .ok('Neat!')
+        .cancel('Cancelar')
+        .targetEvent(event)
+    );
+  };
+
+    
+    $timeout(function () {
+        vm.getTicket();
+    }, 50);
 });

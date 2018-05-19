@@ -10,12 +10,13 @@
                     </div>
                     <fieldset class="standard">
                     <md-list flex>
-<md-list-item class="md-3-line" ng-click=null>
+                        <md-list-item class="md-3-line" ng-repeat="d in vm.ticket" ng-click="doSecondaryAction($event,d)">
     <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
   <div class="md-list-item-text" layout="column">
-    <p>First Line</p>
-    <p>Second Line</p>
-    <p>Third Line</p>
+    <p>Ticket#{{d.id}} Usuario:{{d.usuario.nombreUsuario}}</p>
+    <p>Departamento:{{d.usuario.areaTrabajo.departamento.nombreDepartamento}}</p>
+    <p>Problema: {{d.tituloProblema}}</p>
+    <p>{{d.fechaInicio | date: 'dd/MM/yyyy HH:mm:ss'}}</p>
     <div layout="row" layout-align="center center">
         <md-button class="md-icon-button">
             <md-icon  md-svg-icon="resources/icons/chat.svg" ></md-icon> 
@@ -24,6 +25,7 @@
     </div>
   </div>
      <md-divider ng-if="!$last"></md-divider>
+     
 </md-list-item>
                         <md-list-item class="md-3-line" ng-click=null>
     <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />

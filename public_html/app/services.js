@@ -110,6 +110,14 @@ app.service('Ticketcreado', function ($http, WS_URL) {
             params: {'correo': correo}
         });
     };
+    
+ service.ticketmostrar = function (idDepartamento) {
+        return $http({
+            url: getUrl() + '/',
+            method: 'GET',
+            params: {'idDepartamento': idDepartamento}
+        });
+    };   
 
 });
 
@@ -121,12 +129,11 @@ app.service('TicketDetallecreado', function ($http, WS_URL) {
         return WS_URL + path;
     }
 
-    service.crearticketDetalle = function (ticketDetalle,ticketId) {
+    service.crearticketDetalle = function (asunto,ticketId) {
         return $http({
             url: getUrl() + '/',
             method: 'POST',
-            data: ticketDetalle,
-            params: {'ticketId':ticketId}
+            params: {'asunto':asunto,'ticketId':ticketId}
         });
     };
 

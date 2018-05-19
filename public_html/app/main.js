@@ -64,10 +64,10 @@ app.config(function ($stateProvider, $httpProvider) {
                     }
                 }
             })
-            .state('Principal', {
+            .state('menu.Principal', {
                 url: '/Principal',
                 views: {
-                    "index": {
+                    "menu": {
                         controller: 'AddUser as vm',
                         templateUrl: 'templates/Principal.html'
                     }
@@ -86,7 +86,7 @@ app.config(function ($stateProvider, $httpProvider) {
                 url: '/bandejaTicket',
                 views: {
                     "menu": {
-                        //controller: 'AddUser as vm',
+                        controller: 'ticketBandeja as vm',
                         templateUrl: 'templates/bandejaTicket.html'
                     }
                 }
