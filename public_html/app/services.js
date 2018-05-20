@@ -22,6 +22,22 @@ app.service('UsuarioService', function ($http, WS_URL) {
             params: {}
         });
     };
+    
+    service.findAll = function () {
+        return $http({
+            url: getUrl(),
+            method: 'GET',
+            params: {}
+        });
+    };
+    
+    service.getfindByAreatrabajoId = function (areatrabajoId) {
+        return $http({
+            url: getUrl() + 'getfindByUsuario2',
+            method: 'GET',
+            params: {'idArea': areatrabajoId}
+        });
+    };
 
 });
 

@@ -10,7 +10,7 @@
                     </div>
                     <fieldset class="standard">
                     <md-list flex>
-                        <md-list-item class="md-3-line" ng-repeat="d in vm.ticket" ng-click="doSecondaryAction($event,d)">
+                        <md-list-item class="md-3-line" ng-repeat="d in vm.ticket" ng-click="showAdvanced($event,d)">
     <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
   <div class="md-list-item-text" layout="column">
     <p>Ticket#{{d.id}} Usuario:{{d.usuario.nombreUsuario}}</p>
@@ -27,7 +27,7 @@
      <md-divider ng-if="!$last"></md-divider>
      
 </md-list-item>
-                        <md-list-item class="md-3-line" ng-click=null>
+                        <md-list-item class="md-3-line" ng-click="showAdvanced($event)">
     <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
   <div class="md-list-item-text" layout="column">
     <p>First Line</p>

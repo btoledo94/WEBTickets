@@ -398,11 +398,12 @@ app.controller('AddTicketController', function ($state, $cookies,UsuarioDepartam
 
 
 
-app.controller('ticketBandeja', function ($scope, Ticketcreado, $cookies,$timeout,$mdDialog) {
+app.controller('ticketBandeja', function ($scope, Ticketcreado, $cookies,$timeout,$mdDialog,UsuarioService,UsuarioDepartamento) {
 
     var vm = this;
     
     vm.ticket=[];
+    vm.departamentos2 = [];
       
     var session = $cookies.getObject('TicketsUMG');
     
@@ -423,19 +424,71 @@ app.controller('ticketBandeja', function ($scope, Ticketcreado, $cookies,$timeou
             
     };
     
+  $scope.showAdvanced = function(ev,d) {
+    $mdDialog.show({
+        
+      locals:{dataToPass:d.usuario.nombreUsuario,dataToPass2:d.id},
+      controller: DialogController,
+      templateUrl: 'templateDialog/asignacion.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    })
+    .then(function(answer) {
+      $scope.status = 'You said the information was "' + answer + '".';
+    }, function() {
+      $scope.status = 'You cancelled the dialog.';
+    });
+};
+
+
+function DialogController($scope, $mdDialog,dataToPass,dataToPass2) {
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
     
-    $scope.doSecondaryAction = function(event,d) {
-    $mdDialog.show(
-      $mdDialog.prompt()
-        .title('Usuario: '+d.usuario.nombreUsuario)
-        .textContent('Secondary actions can be used for one click actions')
-        .ariaLabel('Secondary click demo')
-        .placeholder('Texto')
-        .initialValue()
-        .ok('Neat!')
-        .cancel('Cancelar')
-        .targetEvent(event)
-    );
+    $scope.getDepartamentos2 = function () {
+
+        UsuarioDepartamento.getfindByDepartamentoId(session.userdepartamento).success(function (data, status) {
+
+            console.log("Departamentos: ", data);
+            $scope.areaTrabajo = data;
+
+            console.log($scope.areaTrabajo);
+            
+           
+        }).error(function (data, status) {
+            console.error(data);
+        });
+
+    };
+    
+    
+    $scope.getAreatrabajo2 = function (depa) {
+        UsuarioService.getfindByAreatrabajoId(depa).success(function (data, status) {
+
+            console.log("Usuarios: ", data);
+            $scope.dep = data;
+
+            console.log($scope.dep);
+            
+           
+        }).error(function (data, status) {
+            console.error(data);
+        });
+
+    };
+    console.log('>>>>>>'+dataToPass2+'>>>>>>'+dataToPass,'>>>>>>'+session.userName);
+    $scope.getDepartamentos2();
+    $scope.getAreatrabajo2();
   };
 
     

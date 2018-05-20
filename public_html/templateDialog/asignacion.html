@@ -1,0 +1,55 @@
+<md-dialog>
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Asignar Ticket</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <md-icon md-svg-src="resources/icons/close1.svg" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+      <md-dialog-content >
+      <div class="md-dialog-content">
+        
+                              <div layout="row" layout-align="center center">
+                        <div flex="90">
+                            <md-input-container style="width: 98%;">
+                                <label>Area de Trabajo</label>
+                                <md-select ng-model="$scope.depa" required ng-change="getAreatrabajo2($scope.depa)">
+                                    <md-option ng-repeat="d in areaTrabajo" ng-value="{{d.id}}" >{{d.nombreArea}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                    </div>
+          
+          
+           <div layout="row" layout-align="center center">
+                        <div flex="90">
+                            <md-input-container style="width: 98%;">
+                                <label>Tecnico</label>
+                                <md-select ng-model="hn">
+                                    <md-option ng-repeat="d in dep" ng-value="{{d.id}}" >{{d.nombreUsuario}}</md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+                    </div>
+                    
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button target="_blank" md-autofocus>
+        Asignar Ticket
+      </md-button>
+      <span flex></span>
+      <md-button ng-click="answer('not useful')">
+       Aceptar
+      </md-button>
+      <md-button ng-click="answer('useful')" class="md-primary">
+        Trasladar Ticket
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>
