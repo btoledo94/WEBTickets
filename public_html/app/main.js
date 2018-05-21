@@ -90,6 +90,14 @@ app.config(function ($stateProvider, $httpProvider) {
                         templateUrl: 'templates/bandejaTicket.html'
                     }
                 }
+            }).state('menu.misTicket', {
+                url: '/misTicket',
+                views: {
+                    "menu": {
+                        controller: 'Mytickets as vm',
+                        templateUrl: 'templates/misTicket.html'
+                    }
+                }
             });
 
 

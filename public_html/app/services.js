@@ -133,7 +133,31 @@ app.service('Ticketcreado', function ($http, WS_URL) {
             method: 'GET',
             params: {'idDepartamento': idDepartamento}
         });
-    };   
+    };
+    
+    service.ticketAsignacion = function (idTicket,idUsuarioAsig,idArea) {
+        return $http({
+            url: getUrl() + '/encabezadoTicket',
+            method: 'POST',
+            params: {'idTicket': idTicket,'idUsuarioAsig': idUsuarioAsig,'idArea': idArea}
+        });
+    };
+    
+    service.ticketAsignacion = function (idTicket,idUsuarioAsig,idArea) {
+        return $http({
+            url: getUrl() + '/encabezadoTicket',
+            method: 'POST',
+            params: {'idTicket': idTicket,'idUsuarioAsig': idUsuarioAsig,'idArea': idArea}
+        });
+    };
+    
+    service.ticketAsignacionmostrar = function (idUsuario) {
+        return $http({
+            url: getUrl() + '/myTicket',
+            method: 'GET',
+            params: {'idUsuario': idUsuario}
+        });
+    };
 
 });
 

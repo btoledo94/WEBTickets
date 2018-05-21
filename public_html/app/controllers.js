@@ -296,6 +296,11 @@ vm.pantallas = [];
         $state.go("menu.bandejaTicket");
     };
     
+    vm.misTicket = function(){
+        $state.go("menu.misTicket");
+    };
+    
+    
     vm.inicio = function(){
         $state.go("menu");
     };
@@ -398,7 +403,7 @@ app.controller('AddTicketController', function ($state, $cookies,UsuarioDepartam
 
 
 
-app.controller('ticketBandeja', function ($scope, Ticketcreado, $cookies,$timeout,$mdDialog,UsuarioService,UsuarioDepartamento) {
+app.controller('ticketBandeja', function ($state,$scope,Ticketcreado, $cookies,$timeout,$mdDialog,UsuarioService,UsuarioDepartamento) {
 
     var vm = this;
     
@@ -436,9 +441,12 @@ app.controller('ticketBandeja', function ($scope, Ticketcreado, $cookies,$timeou
     })
     .then(function(answer) {
       $scope.status = 'You said the information was "' + answer + '".';
+      
     }, function() {
       $scope.status = 'You cancelled the dialog.';
+      
     });
+ 
 };
 
 
@@ -449,6 +457,7 @@ function DialogController($scope, $mdDialog,dataToPass,dataToPass2) {
 
     $scope.cancel = function() {
       $mdDialog.cancel();
+      
     };
 
     $scope.answer = function(answer) {
@@ -471,8 +480,7 @@ function DialogController($scope, $mdDialog,dataToPass,dataToPass2) {
 
     };
     
-    
-    $scope.getAreatrabajo2 = function (depa) {
+   $scope.getAreatrabajo2 = function (depa) {
         UsuarioService.getfindByAreatrabajoId(depa).success(function (data, status) {
 
             console.log("Usuarios: ", data);
@@ -486,6 +494,26 @@ function DialogController($scope, $mdDialog,dataToPass,dataToPass2) {
         });
 
     };
+    
+    
+    $scope.ticketasignado = function (usuario,depa) {
+        vm.isShowProgressLinear = true;
+        Ticketcreado.ticketAsignacion(dataToPass2,usuario,depa).success(function (data, status) {
+        vm.isShowProgressLinear = false;
+            console.log("Ticket: ", data);
+                                   
+                        if (status === 200) {
+
+                    alert("Ticket Asignado Exitosamente"); 
+                    $state.reload();      
+                    $mdDialog.cancel();
+                }      
+           
+        }).error(function (data, status) {
+            console.error(data);
+        });
+    };
+     
     console.log('>>>>>>'+dataToPass2+'>>>>>>'+dataToPass,'>>>>>>'+session.userName);
     $scope.getDepartamentos2();
     $scope.getAreatrabajo2();
@@ -494,5 +522,37 @@ function DialogController($scope, $mdDialog,dataToPass,dataToPass2) {
     
     $timeout(function () {
         vm.getTicket();
+    }, 50);
+});
+
+
+
+app.controller('Mytickets', function ($state,$scope,Ticketcreado, $cookies,$timeout,$mdDialog) {
+
+    var vm = this;
+   vm.myticket=[];
+    vm.departamentos2 = [];
+      
+    var session = $cookies.getObject('TicketsUMG');
+    
+    vm.getMyTicket = function () {
+       
+       
+        Ticketcreado.ticketAsignacionmostrar(session.userId).success(function (data, status) {
+           
+            
+            console.log("tickets: ", data);
+            vm.myticket = data;
+
+            console.log(vm.myticket);
+
+        }).error(function (data, status) {
+            console.error(data);
+        });
+            
+    };
+    
+    $timeout(function () {
+        vm.getMyTicket();
     }, 50);
 });

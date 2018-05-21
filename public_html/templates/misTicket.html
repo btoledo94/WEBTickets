@@ -2,14 +2,14 @@
     <div layout="row" layout-align="center center">
         <div flex="50">
             <md-card>
-                <ng-form id="ticketForm" name="ticketForm">
+                <ng-form id="myTicketForm" name="ticketForm">
 
                     <div layout="row" layout-align="center center">
-                        <h3>TICKETS EN BANDEJA</h3>
+                        <h3>MIS TICKETS</h3>
                     </div>
                     <fieldset class="standard">
                     <md-list flex>
-                        <md-list-item class="md-3-line" ng-repeat="d in vm.ticket" ng-click="showAdvanced($event,d)">
+                        <md-list-item class="md-3-line" ng-repeat="d in vm.myticket" ng-click="showAdvanced($event,d)">
     <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
   <div class="md-list-item-text" layout="column">
     <p>Ticket#{{d.id}} Usuario:{{d.usuario.nombreUsuario}}</p>
@@ -27,14 +27,6 @@
   </div>
      <md-divider ng-if="!$last"></md-divider>
      
-</md-list-item>
-                        <md-list-item class="md-3-line" ng-click="showAdvanced($event)">
-    <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
-  <div class="md-list-item-text" layout="column">
-    <p>First Line</p>
-    <p>Second Line</p>
-    <p>Third Line</p>
-  </div>
 </md-list-item>
    </md-list>
  </fieldset>
