@@ -9,7 +9,7 @@
                     </div>
                     <fieldset class="standard">
                     <md-list flex>
-                        <md-list-item class="md-3-line" ng-repeat="d in vm.myticket" ng-click="showAdvanced($event,d)">
+                        <md-list-item class="md-3-line" ng-repeat="d in vm.myticket">
     <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
   <div class="md-list-item-text" layout="column">
     <p>Ticket#{{d.id}} Usuario:{{d.usuario.nombreUsuario}}</p>
@@ -18,7 +18,7 @@
     <p>{{d.fechaInicio | date: 'dd/MM/yyyy HH:mm:ss'}}</p>
     {{$state.transitionTo("menu.bandejaTicket")}}
     <div layout="row" layout-align="center center">
-        <md-button class="md-icon-button">
+        <md-button class="md-icon-button" ng-click="showAdvanced2($event,d)">
             <md-icon  md-svg-icon="resources/icons/chat.svg" ></md-icon> 
             
         </md-button>

@@ -176,5 +176,13 @@ app.service('TicketDetallecreado', function ($http, WS_URL) {
             params: {'asunto':asunto,'ticketId':ticketId}
         });
     };
+    
+    service.ticketAsignacioDetallenmostrar = function (ticketId) {
+        return $http({
+            url: getUrl() + '/getactualizar',
+            method: 'GET',
+            params: {'ticketId': ticketId}
+        });
+    };
 
 });

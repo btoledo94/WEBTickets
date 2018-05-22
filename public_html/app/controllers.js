@@ -361,7 +361,9 @@ app.controller('AddTicketController', function ($state, $cookies,UsuarioDepartam
            console.log(vm.ticket);
            console.log(vm.correo);
            
+            vm.isShowProgressLinear = true;
            Ticketcreado.crearticketon(vm.ticket,vm.correo).success(function (data, status){
+                vm.isShowProgressLinear = false;
                 console.log(data);
                 
                 if (status === 200) {
@@ -370,9 +372,9 @@ app.controller('AddTicketController', function ($state, $cookies,UsuarioDepartam
                    
                    console.log("este es detalle",data.id);
                    
-                   
+                    vm.isShowProgressLinear = true;
                    TicketDetallecreado.crearticketDetalle(vm.asunto,data.id).success(function (data, status){
-                       
+                        vm.isShowProgressLinear = false;
                         if (status === 200) {
 
                     alert("Ticket Registrado Exitosamente");
@@ -403,7 +405,7 @@ app.controller('AddTicketController', function ($state, $cookies,UsuarioDepartam
 
 
 
-app.controller('ticketBandeja', function ($state,$scope,Ticketcreado, $cookies,$timeout,$mdDialog,UsuarioService,UsuarioDepartamento) {
+app.controller('ticketBandeja', function ($state,$scope,Ticketcreado, TicketDetallecreado,$cookies,$timeout,$mdDialog,UsuarioService,UsuarioDepartamento) {
 
     var vm = this;
     
@@ -519,6 +521,60 @@ function DialogController($scope, $mdDialog,dataToPass,dataToPass2) {
     $scope.getAreatrabajo2();
   };
 
+       $scope.showAdvanced2 = function(ev,d) {
+    $mdDialog.show({
+        
+      locals:{dataToPass:d.usuario.nombreUsuario,dataToPass2:d.id},
+      controller: DialogController2,
+      templateUrl: 'templateDialog/detalletickets.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    })
+    .then(function(answer) {
+      $scope.status = 'You said the information was "' + answer + '".';
+      
+    }, function() {
+      $scope.status = 'You cancelled the dialog.';
+      
+    });
+ 
+};
+    
+  function DialogController2($scope, $mdDialog,dataToPass,dataToPass2) {
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+      
+    };
+
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+    
+        
+    $scope.mostrarticketdetalleasignado = function () {
+        vm.isShowProgressLinear = true;
+        TicketDetallecreado.ticketAsignacioDetallenmostrar(dataToPass2).success(function (data, status) {
+        vm.isShowProgressLinear = false;
+        
+            console.log("tickets: ", data);
+           $scope.detalletickets = data;
+
+            console.log($scope.detalletickets);
+           
+        }).error(function (data, status) {
+            console.error(data);
+        });
+    };
+     
+    console.log('>>>>>>'+dataToPass2+'>>>>>>'+dataToPass,'>>>>>>'+session.userName);
+  $scope.mostrarticketdetalleasignado();
+  };
+
     
     $timeout(function () {
         vm.getTicket();
@@ -527,7 +583,7 @@ function DialogController($scope, $mdDialog,dataToPass,dataToPass2) {
 
 
 
-app.controller('Mytickets', function ($state,$scope,Ticketcreado, $cookies,$timeout,$mdDialog) {
+app.controller('Mytickets', function ($state,$scope,Ticketcreado, $cookies,$timeout,$mdDialog,TicketDetallecreado) {
 
     var vm = this;
    vm.myticket=[];
@@ -551,6 +607,61 @@ app.controller('Mytickets', function ($state,$scope,Ticketcreado, $cookies,$time
         });
             
     };
+    
+     $scope.showAdvanced2 = function(ev,d) {
+    $mdDialog.show({
+        
+      locals:{dataToPass:d.usuario.nombreUsuario,dataToPass2:d.id},
+      controller: DialogController2,
+      templateUrl: 'templateDialog/detalletickets.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    })
+    .then(function(answer) {
+      $scope.status = 'You said the information was "' + answer + '".';
+      
+    }, function() {
+      $scope.status = 'You cancelled the dialog.';
+      
+    });
+ 
+};
+
+
+function DialogController2($scope, $mdDialog,dataToPass,dataToPass2) {
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+      
+    };
+
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+    
+        
+    $scope.mostrarticketdetalleasignado = function () {
+        vm.isShowProgressLinear = true;
+        TicketDetallecreado.ticketAsignacioDetallenmostrar(dataToPass2).success(function (data, status) {
+        vm.isShowProgressLinear = false;
+        
+            console.log("tickets: ", data);
+           $scope.detalletickets = data;
+
+            console.log($scope.detalletickets);
+           
+        }).error(function (data, status) {
+            console.error(data);
+        });
+    };
+     
+    console.log('>>>>>>'+dataToPass2+'>>>>>>'+dataToPass,'>>>>>>'+session.userName);
+  $scope.mostrarticketdetalleasignado();
+  };
     
     $timeout(function () {
         vm.getMyTicket();
