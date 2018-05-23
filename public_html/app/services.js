@@ -135,25 +135,26 @@ app.service('Ticketcreado', function ($http, WS_URL) {
         });
     };
     
-    service.ticketAsignacion = function (idTicket,idUsuarioAsig,idArea) {
+    service.ticketAsignacion = function (idTicket,idUsuarioAsig,idArea,nombreActualizado,idDepartamento) {
         return $http({
             url: getUrl() + '/encabezadoTicket',
             method: 'POST',
-            params: {'idTicket': idTicket,'idUsuarioAsig': idUsuarioAsig,'idArea': idArea}
+            params: {'idTicket': idTicket,'idUsuarioAsig': idUsuarioAsig,'idArea': idArea,'nombreActualizado':nombreActualizado,'idDepartamento':idDepartamento}
         });
     };
     
-    service.ticketAsignacion = function (idTicket,idUsuarioAsig,idArea) {
-        return $http({
-            url: getUrl() + '/encabezadoTicket',
-            method: 'POST',
-            params: {'idTicket': idTicket,'idUsuarioAsig': idUsuarioAsig,'idArea': idArea}
-        });
-    };
-    
+        
     service.ticketAsignacionmostrar = function (idUsuario) {
         return $http({
             url: getUrl() + '/myTicket',
+            method: 'GET',
+            params: {'idUsuario': idUsuario}
+        });
+    };
+    
+    service.myticketcreadomostrar = function (idUsuario) {
+        return $http({
+            url: getUrl() + '/myTicketCreado',
             method: 'GET',
             params: {'idUsuario': idUsuario}
         });
@@ -169,11 +170,11 @@ app.service('TicketDetallecreado', function ($http, WS_URL) {
         return WS_URL + path;
     }
 
-    service.crearticketDetalle = function (asunto,ticketId) {
+    service.crearticketDetalle = function (asunto,ticketId,nombreAsignado,nombreDeptoArea) {
         return $http({
             url: getUrl() + '/',
             method: 'POST',
-            params: {'asunto':asunto,'ticketId':ticketId}
+            params: {'asunto':asunto,'ticketId':ticketId,'nombreAsignado':nombreAsignado,'nombreDeptoArea':nombreDeptoArea}
         });
     };
     

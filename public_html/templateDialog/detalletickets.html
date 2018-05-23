@@ -15,7 +15,8 @@
                     <md-list flex>
                         <md-list-item class="md-3-line" ng-repeat="d in detalletickets">
   <div class="md-list-item-text" layout="column">
-    
+    <p>Actualizado por:{{d.nombreActualizado}}</p>
+    <p>Area:{{d.nombreDeptoArea}}</p>
     <p>Asunto:{{d.asunto}}</p>
     <p>{{d.fechaActualizar | date: 'dd/MM/yyyy HH:mm:ss'}}</p>
      </div>
@@ -29,14 +30,15 @@
 
            <md-input-container class="md-block">
              <label>Asunto</label>
-              <textarea ng-model="vm.asunto" md-maxlength="500" rows="3" md-select-on-focus></textarea>
+              <textarea ng-model="asunto" md-maxlength="500" rows="3" md-select-on-focus></textarea>
                     </md-input-container>
                         </div>
                     </div>
+    </fieldset>
     </md-dialog-content>
 
     <md-dialog-actions layout="row">
-       <md-button ng-click="cancel()">
+       <md-button ng-click="actualizarTicketDetalle()">
            Enviar
         <md-icon  md-svg-icon="resources/icons/send-button.svg"></md-icon>             
         </md-button>

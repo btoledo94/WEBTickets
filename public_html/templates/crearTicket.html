@@ -1,60 +1,40 @@
 <md-content ng-cloak>
+    <div layout="row" >
+     <md-fab-speed-dial  md-direction="left" class="md-scale md-fab-top-right">
+        <md-fab-trigger>
+            <md-button aria-label="menu" class="md-fab md-warn" ng-click="showAdvanced2($event)">
+            <md-icon md-svg-src="resources/icons/add_1.svg"></md-icon>
+          </md-button>
+        </md-fab-trigger>
+         </md-fab-speed-dial>
+      </div>
     <div layout="row" layout-align="center center">
         <div flex="50">
             <md-card>
-
-                <ng-form id="ticketForm" name="ticketForm">
-
-                    <div layout="row" layout-align="center center">
-                        <h3>CREAR TICKET</h3>
-                    </div>
-
-                    <div layout="row" layout-align="center center">
-                        <div flex="90">
-
-                            <md-input-container style="width: 98%;">
-                                <label>Titulo del Problema</label>
-                                <input type="text" name="tituloProblema" ng-model="vm.ticket.tituloProblema" required/>
-                            </md-input-container>
-
-                        </div>
-                    </div>
-
-           
-                    <div layout="row" layout-align="center center">
-                        <div flex="90">
-
-           <md-input-container class="md-block">
-             <label>Asunto</label>
-              <textarea ng-model="vm.asunto" md-maxlength="500" rows="5" md-select-on-focus></textarea>
-                    </md-input-container>
-                        </div>
-                    </div>
-
-
-                    <!--
-                    Datos adicionales dependiendo del perfil
-                    -->
-
-                    <div layout="row" layout-align="center center">
-                        <div flex="90">
-                            <md-input-container style="width: 98%;">
-                                <label>Departamento</label>
-                                <md-select ng-model="vm.dep" required>
-                                    <md-option ng-repeat="d in vm.departamento1" ng-value="{{d.id}}" >{{d.nombreDepartamento}}</md-option>
-                                </md-select>
-                            </md-input-container>
-                        </div>
-                    </div>
-
-                    
-                    <div layout="row" layout-align="center center">
-                        <md-button class="md-raised md-warn" ng-disabled="ticketForm.$invalid" ng-click="vm.crearticket()">Guardar</md-button>
-                    </div>
-
-                </ng-form>
-
-            </md-card>
+                 
+                    <fieldset class="standard">
+                    <md-list flex>
+                        <md-list-item class="md-3-line" ng-repeat="d in vm.ticket2">
+    <img ng-src="{{item.face}}?{{$index}}" class="md-avatar" alt="{{item.who}}" />
+  <div class="md-list-item-text" layout="column">
+    <p>Ticket#{{d.id}} Usuario:{{d.usuario.nombreUsuario}}</p>
+    <p>Departamento:{{d.usuario.areaTrabajo.departamento.nombreDepartamento}}</p>
+    <p>Problema: {{d.tituloProblema}}</p>
+    <p>{{d.fechaInicio | date: 'dd/MM/yyyy HH:mm:ss'}}</p>
+    {{$state.transitionTo("menu.bandejaTicket")}}
+    <div layout="row" layout-align="center center">
+        <md-button class="md-icon-button" ng-click="showAdvanced($event,d)">
+            <md-icon  md-svg-icon="resources/icons/chat.svg" ></md-icon>             
+        </md-button>
+                             
+    </div>
+  </div>
+     <md-divider ng-if="!$last"></md-divider>
+     
+</md-list-item>
+</md-list>
+ </fieldset>
+    </md-card>
         </div>
     </div>
 

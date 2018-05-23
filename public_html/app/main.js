@@ -64,10 +64,10 @@ app.config(function ($stateProvider, $httpProvider) {
                     }
                 }
             })
-            .state('menu.Principal', {
+            .state('Principal', {
                 url: '/Principal',
                 views: {
-                    "menu": {
+                    "index": {
                         controller: 'AddUser as vm',
                         templateUrl: 'templates/Principal.html'
                     }
